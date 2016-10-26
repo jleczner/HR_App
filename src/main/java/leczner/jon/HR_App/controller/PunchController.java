@@ -38,7 +38,7 @@ public class PunchController {
             ParseException{
         return punches
                 .stream()
-                .filter(punch -> punch.getEmployeeId() == employee.getId())
+                .filter(punch -> punch.getEmployeeId().equals(employee.getId()))
                 .collect(Collectors.toList());
     }
 

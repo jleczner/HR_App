@@ -1,9 +1,5 @@
 package leczner.jon.HR_App.domain;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import leczner.jon.HR_App.utils.JsonDateSerializer;
-
-import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,16 +7,16 @@ import java.util.Date;
 /**
  * Created by jonathanleczner on 10/25/16.
  */
-@Entity
-@Table(name="punch")
+//@Entity
+//@Table(name="punch")
 public class Punch {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long employeeId;
     private Date punchTime;
 
-    @Transient
+//    @Transient
     private final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public Punch(Long employeeId, String date) throws ParseException {
@@ -46,7 +42,7 @@ public class Punch {
         this.employeeId = employeeId;
     }
 
-    @JsonSerialize(using=JsonDateSerializer.class)
+//    @JsonSerialize(using=JsonDateSerializer.class)
     public Date getPunchTime() {
         return punchTime;
     }

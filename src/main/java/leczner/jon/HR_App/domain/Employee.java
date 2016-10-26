@@ -1,6 +1,5 @@
 package leczner.jon.HR_App.domain;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,12 +7,12 @@ import java.util.List;
 /**
  * Created by jonathanleczner on 10/25/16.
  */
-@Entity
-@Table(name="employee")
+//@Entity
+//@Table(name="employee")
 public class Employee {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String name;
     private List<Date> punches;

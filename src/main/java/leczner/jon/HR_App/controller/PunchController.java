@@ -1,49 +1,47 @@
 package leczner.jon.HR_App.controller;
 
 import leczner.jon.HR_App.domain.Punch;
+import leczner.jon.HR_App.repository.PunchRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by jonathanleczner on 10/25/16.
  */
 @RestController
+@RequestMapping(value = "/punches")
+//@CrossOrigin(origins = "http://localhost:9000")
 public class PunchController {
 
-    private static List<Punch> punches = new ArrayList<Punch>();
+    private PunchRepository punchRepository;
 
-    static {
-        try {
-            punches.add(new Punch(0L, "2016-10-25 09:00:00"));
-            punches.add(new Punch(0L, "2016-10-25 17:00:00"));
-            punches.add(new Punch(1L, "2016-10-25 09:01:00"));
-            punches.add(new Punch(1L, "2016-10-25 16:30:00"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    @Autowired
+    public PunchController(PunchRepository punchRepository) {
+        this.punchRepository = punchRepository;
     }
 
-    @RequestMapping("/punches/all")
-    public List<Punch> getAll() {
-        return punches;
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public Iterable<Punch> getAllPunch() {
+        return punchRepository.findAll();
     }
 
-    @RequestMapping("/punches/findBy/employee/{id}")
-    public List<Punch> findByEmployee(@PathVariable Long id) throws
-            ParseException{
-        return punches
-                .stream()
-                .filter(punch -> punch.getEmployeeId().equals(id))
-                .collect(Collectors.toList());
+    @RequestMapping(value = "/timecard/{id}", method = RequestMethod.GET)
+    public List<Punch> getPunchesForEmployee(@PathVariable long id) {
+        return punchRepository.findByEmployeeId(id);
     }
 
     @RequestMapping(value = "/punch", method = RequestMethod.POST)
-    public Punch add(@RequestBody Punch punch) {
-        punches.add(punch);
+    public Punch submitPunch(@RequestBody Punch punch) {
+        punchRepository.save(punch);
         return punch;
+    }
+
+    @RequestMapping(value = "/punch", method = RequestMethod.OPTIONS)
+    public ResponseEntity handle() {
+      return new ResponseEntity(HttpStatus.OK);
     }
 }

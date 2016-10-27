@@ -1,27 +1,27 @@
 package leczner.jon.HR_App.domain;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created by jonathanleczner on 10/25/16.
  */
-//@Entity
-//@Table(name="punch")
+@Entity
 public class Punch {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long employeeId;
-    private Date punchTime;
+    private String punchTime;
 
 //    @Transient
-    private final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//    private final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public Punch(Long employeeId, String date) throws ParseException {
+    public Punch(Long employeeId, String punchTime) {
         this.employeeId = employeeId;
-        this.punchTime = format.parse(date);
+        this.punchTime = punchTime;
     }
 
     public Punch() {}
@@ -42,12 +42,11 @@ public class Punch {
         this.employeeId = employeeId;
     }
 
-//    @JsonSerialize(using=JsonDateSerializer.class)
-    public Date getPunchTime() {
+    public String getPunchTime() {
         return punchTime;
     }
 
-    public void setPunchTime(Date punchTime) {
+    public void setPunchTime(String punchTime) {
         this.punchTime = punchTime;
     }
 }

@@ -1,6 +1,5 @@
 package leczner.jon.HR_App.controller;
 
-import leczner.jon.HR_App.domain.Employee;
 import leczner.jon.HR_App.domain.Punch;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,12 +32,12 @@ public class PunchController {
         return punches;
     }
 
-    @RequestMapping("/punches/findBy/employee/{employee}")
-    public List<Punch> findByEmployee(@PathVariable Employee employee) throws
+    @RequestMapping("/punches/findBy/employee/{id}")
+    public List<Punch> findByEmployee(@PathVariable Long id) throws
             ParseException{
         return punches
                 .stream()
-                .filter(punch -> punch.getEmployeeId().equals(employee.getId()))
+                .filter(punch -> punch.getEmployeeId().equals(id))
                 .collect(Collectors.toList());
     }
 

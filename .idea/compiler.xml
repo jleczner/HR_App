@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="HR_App" />
+        <module name="HR_Server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="HR_App" target="1.8" />
+      <module name="HR_Server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

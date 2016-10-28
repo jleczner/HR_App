@@ -11,5 +11,5 @@ import java.util.List;
  */
 @Repository
 public interface PunchRepository extends JpaRepository<Punch, Long> {
-    List<Punch> findByEmployeeId(long id);
+    List<Punch> findByEmployeeIdLike(long id);
 }

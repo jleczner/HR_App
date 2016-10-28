@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * Created by jonathanleczner on 10/25/16.
  */
@@ -29,9 +27,9 @@ public class PunchController {
         return punchRepository.findAll();
     }
 
-    @RequestMapping(value = "/timecard/{id}", method = RequestMethod.GET)
-    public List<Punch> getPunchesForEmployee(@PathVariable long id) {
-        return punchRepository.findByEmployeeId(id);
+    @RequestMapping(value = "/employee/{id}", method = RequestMethod.GET)
+    public Iterable<Punch> getPunchesForEmployee(@PathVariable("id") long id) {
+        return punchRepository.findByEmployeeIdLike(id);
     }
 
     @RequestMapping(value = "/punch", method = RequestMethod.POST)
@@ -40,7 +38,7 @@ public class PunchController {
         return punch;
     }
 
-    @RequestMapping(value = "/punch", method = RequestMethod.OPTIONS)
+    @RequestMapping(value = "/options", method = RequestMethod.OPTIONS)
     public ResponseEntity handle() {
       return new ResponseEntity(HttpStatus.OK);
     }
